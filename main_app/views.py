@@ -12,10 +12,10 @@ class RedPanda:
     self.age = age
 
 red_pandas = [
-  RedPanda('Lolo', 'tabby', 'Kinda rude.', 3),
-  RedPanda('Sachi', 'tortoiseshell', 'Looks like a turtle.', 0),
-  RedPanda('Fancy', 'bombay', 'Happy fluff ball.', 4),
-  RedPanda('Bonk', 'selkirk rex', 'Meows loudly.', 6)
+  RedPanda('Lili', 'red boi', 'Kinda rude.', 3),
+  RedPanda('Katie', 'brownish', 'Looks like a turtle.', 0),
+  RedPanda('Handsome', 'viscious', 'Happy fluff ball.', 4),
+  RedPanda('McAlistar', 'cutie', 'Yaps loudly.', 6)
 ]
 
 # Add new view
