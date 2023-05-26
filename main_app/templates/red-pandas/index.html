@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link 
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/red-pandas/red-panda-index.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <h1>Cat List</h1>
+</section>
+
+<section class="card-container">
+  {% for red_panda in red_pandas %}
+    <div class="card">
+      <div class="card-content">
+        <h2 class="card-title">{{ red_panda.name }}</h2>
+        {% if red_panda.age > 0 %}
+          <p>A {{ red_panda.age }} year old {{ red_panda.breed }}</p>
+        {% else %}
+          <p>A {{ red_panda.breed }} kitten.</p>
+        {% endif %}
+        <p><small>{{ red_panda.description }}</small></p>
+      </div>
+    </div>
+  {% endfor %}
+</section>
+
+{% endblock %}
