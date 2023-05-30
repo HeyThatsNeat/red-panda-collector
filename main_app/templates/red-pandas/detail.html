@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link 
+  rel="stylesheet" 
+  type="text/css" 
+  href="{% static 'css/red-pandas/red-panda-detail.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+
+<section class="red-panda-container">
+  <div class="red-panda-img">
+  </div>
+  <div class="red-panda-details">
+    <h1>{{ red_panda.name }}</h1>
+    {% if red_panda.age > 0 %}
+      <h2>A {{ red_panda.age }} year old {{ red_panda.breed }}</h2>
+    {% else %}
+      <h2>A {{ red_panda.breed }} baby.</h2>
+    {% endif %}
+    <p>{{ red_panda.description }}</p>
+  </div>
+</section>
+
+{% endblock %}

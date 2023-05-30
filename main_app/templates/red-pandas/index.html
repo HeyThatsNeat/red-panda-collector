@@ -18,6 +18,7 @@
 <section class="card-container">
   {% for red_panda in red_pandas %}
     <div class="card">
+      <a href="{% url 'red-panda-detail' red_panda.id %}">
       <div class="card-content">
         <h2 class="card-title">{{ red_panda.name }}</h2>
         {% if red_panda.age > 0 %}
