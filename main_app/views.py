@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import RedPanda
 
 # Add new view
@@ -16,3 +17,16 @@ def red_panda_index(request):
 def red_panda_detail(request, red_panda_id):
   red_panda = RedPanda.objects.get(id=red_panda_id)
   return render(request, 'red-pandas/detail.html', { 'red_panda': red_panda })
+
+class RedPandaCreate(CreateView):
+  model = RedPanda
+  fields = '__all__'
+  success_url = '/red-pandas/'
+
+class RedPandaUpdate(UpdateView):
+  model = RedPanda
+  fields = ['breed', 'description', 'age']
+
+class RedPandaDelete(DeleteView):
+  model = RedPanda
+  success_url = '/red-pandas/'

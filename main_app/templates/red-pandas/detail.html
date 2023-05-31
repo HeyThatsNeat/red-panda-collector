@@ -22,6 +22,10 @@
       <h2>A {{ red_panda.breed }} baby.</h2>
     {% endif %}
     <p>{{ red_panda.description }}</p>
+    <div class="red-panda-actions">
+      <a href="{% url 'red-panda-update' red_panda.id %}" class="btn warn">Edit</a>
+      <a href="{% url 'red-panda-delete' red_panda.id %}" class="btn danger">Delete</a>
+    </div>
   </div>
 </section>
 
