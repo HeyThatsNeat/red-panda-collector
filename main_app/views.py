@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 from .models import RedPanda, Toy
 from .forms import FeedingForm
 
@@ -46,3 +47,9 @@ class RedPandaDelete(DeleteView):
 class ToyCreate(CreateView):
   model = Toy
   fields = '__all__'
+
+class ToyList(ListView):
+  model = Toy
+
+class ToyDetail(DetailView):
+  model = Toy
