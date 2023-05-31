@@ -18,9 +18,10 @@ def red_panda_index(request):
 
 def red_panda_detail(request, red_panda_id):
   red_panda = RedPanda.objects.get(id=red_panda_id)
+  toys_red_panda_doesnt_have = Toy.objects.exclude(id__in = red_panda.toys.all().values_list('id'))
   feeding_form = FeedingForm()
   return render(request, 'red-pandas/detail.html', {
-    'red_panda': red_panda, 'feeding_form': feeding_form
+    'red_panda': red_panda, 'feeding_form': feeding_form, 'toys': toys_red_panda_doesnt_have
   })
 
 def add_feeding(request, red_panda_id):
@@ -31,6 +32,10 @@ def add_feeding(request, red_panda_id):
     new_feeding.save()
   return redirect('red-panda-detail', red_panda_id=red_panda_id)
 
+def assoc_toy(request, red_panda_id, toy_id):
+  RedPanda.objects.get(id=red_panda_id).toys.add(toy_id)
+  return redirect('red-panda-detail', red_panda_id=red_panda_id)
+
 class RedPandaCreate(CreateView):
   model = RedPanda
   fields = '__all__'
@@ -38,7 +43,7 @@ class RedPandaCreate(CreateView):
 
 class RedPandaUpdate(UpdateView):
   model = RedPanda
-  fields = ['breed', 'description', 'age']
+  fields = ['name', 'breed', 'description', 'age']
 
 class RedPandaDelete(DeleteView):
   model = RedPanda
