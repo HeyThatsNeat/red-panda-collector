@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import RedPanda
+from .forms import FeedingForm
 
 # Add new view
 
@@ -16,7 +17,10 @@ def red_panda_index(request):
 
 def red_panda_detail(request, red_panda_id):
   red_panda = RedPanda.objects.get(id=red_panda_id)
-  return render(request, 'red-pandas/detail.html', { 'red_panda': red_panda })
+  feeding_form = FeedingForm()
+  return render(request, 'red-pandas/detail.html', {
+    'red_panda': red_panda, 'feeding_form': feeding_form
+  })
 
 class RedPandaCreate(CreateView):
   model = RedPanda
