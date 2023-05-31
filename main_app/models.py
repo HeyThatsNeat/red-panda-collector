@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
 
 MEALS = (
   ('B', 'Breakfast'),
@@ -18,6 +19,9 @@ class RedPanda(models.Model):
   
   def get_absolute_url(self):
     return reverse('redpanda-detail', kwargs={'red_panda_id': self.id})
+  
+  def fed_for_today(self):
+    return self.feeding_set.filter(date=date.today()).count() >= len(MEALS)
 
 class Feeding(models.Model):
   date = models.DateField('Feeding date')
@@ -30,3 +34,16 @@ class Feeding(models.Model):
 
   def __str__(self):
     return f"{self.get_meal_display()} on {self.date}"
+
+  class Meta:
+    ordering = ['-date']
+
+class Toy(models.Model):
+  name = models.CharField(max_length=50)
+  color = models.CharField(max_length=20)
+
+  def __str__(self):
+    return self.name
+
+  def get_absolute_url(self):
+    return reverse('toy-detail', kwargs={'pk': self.id})

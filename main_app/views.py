@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import RedPanda
+from .models import RedPanda, Toy
 from .forms import FeedingForm
 
 # Add new view
@@ -22,6 +22,14 @@ def red_panda_detail(request, red_panda_id):
     'red_panda': red_panda, 'feeding_form': feeding_form
   })
 
+def add_feeding(request, red_panda_id):
+  form = FeedingForm(request.POST)
+  if form.is_valid():
+    new_feeding = form.save(commit=False)
+    new_feeding.red_panda_id = red_panda_id
+    new_feeding.save()
+  return redirect('red-panda-detail', red_panda_id=red_panda_id)
+
 class RedPandaCreate(CreateView):
   model = RedPanda
   fields = '__all__'
@@ -34,3 +42,7 @@ class RedPandaUpdate(UpdateView):
 class RedPandaDelete(DeleteView):
   model = RedPanda
   success_url = '/red-pandas/'
+
+class ToyCreate(CreateView):
+  model = Toy
+  fields = '__all__'
