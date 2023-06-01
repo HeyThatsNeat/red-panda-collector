@@ -20,11 +20,18 @@
   <header>
     <nav>
       <ul>
-        <li><a href="{% url 'red-panda-index' %}">All Red Pandas</a></li>
-        <li><a href="{% url 'toy-index' %}">All Toys</a></li>
-        <li><a href="{% url 'red-panda-create' %}">Add a Red Panda</a></li>
-        <li><a href="{% url 'toy-create' %}">Add a Toy</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'red-panda-index' %}">All Red Pandas</a></li>
+          <li><a href="{% url 'toy-index' %}">All Toys</a></li>
+          <li><a href="{% url 'red-panda-create' %}">Add a Red Panda</a></li>
+          <li><a href="{% url 'toy-create' %}">Add a Toy</a></li>
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'logout' %}">Log out</a></li>
+        {% else %}
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'home' %}">Login</a></li>
+          <li><a href="{% url 'signup' %}">Sign Up</a></li>
+        {% endif %}
       </ul>
     </nav>
   </header>
